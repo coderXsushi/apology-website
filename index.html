@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,3 +149,177 @@
   function showEnd(msg) {
     document.getElementById("question").innerText = msg;
     document.getElement
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Apology Flow with Memes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: background-image 0.5s ease-in-out;
+    }
+
+    .box {
+      background: rgba(0,0,0,0.55);
+      padding: 25px 35px;
+      border-radius: 12px;
+      width: 360px;
+      position: relative;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .float-item {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-150%); opacity: 0; }
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(2); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    .firecracker {
+      animation: explode 0.6s forwards;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2 id="question">READY FOR SOME QUESTIONS?</h2>
+  <div id="buttons">
+    <button onclick="start()">Start</button>
+  </div>
+</div>
+
+<script>
+  // Background meme images for each question
+  const bgImages = {
+    q1: "url('meme1.jpg')",
+    q2: "url('meme2.jpg')",
+    q3: "url('meme3.jpg')",
+    q4: "url('meme4.jpg')",
+    q5: "url('meme5.jpg')"
+  };
+
+  function setBackground(key) {
+    document.body.style.backgroundImage = bgImages[key];
+  }
+
+  function start() {
+    setBackground("q1");
+    showQuestion("mam apni ki rege achen?", [
+      {text:"Yes", action:()=>showQ2()},
+      {text:"No", action:()=>showQ2()}  // both answers go to Q2
+    ]);
+  }
+
+  function showQ2() {
+    setBackground("q2");
+    showQuestion("please amay khoma kore deben?", [
+      {text:"Yes", action:()=>showQ3()},
+      {text:"No", action:()=>showQ4()}
+    ]);
+  }
+
+  function explodeNoButton(event) {
+  const btn = event.target;
+  btn.classList.add("firecracker");
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.remove();
+  }, 600);
+}
+
+  function showQ4() {
+    setBackground("q4");
+    let please = "please ".repeat(100);
+    showQuestion("areh " + please + "...", [
+      {text:"ughh fine", action:()=>showQ3()},
+      {text:"alright", action:()=>showQ3()}
+    ]);
+  }
+
+  function showQ5() {
+    setBackground("q5");
+    showQuestion("did you answer the previous question honestly?", [
+      {text:"Yes", action:()=>celebrate()},
+      {text:"No", action:(e)=>firecracker(e)}
+    ]);
+  }
+
+  function showEnd(msg) {
+    document.getElementById("question").innerText = msg;
+    document.getElementById("buttons").innerHTML = "";
+  }
+
+  function showQuestion(text, options) {
+    document.getElementById("question").innerText = text;
+    const btnDiv = document.getElementById("buttons");
+    btnDiv.innerHTML = "";
+    options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.innerText = opt.text;
+      btn.onclick = (e)=>opt.action(e);
+      btnDiv.appendChild(btn);
+    });
+  }
+
+  function celebrate() {
+    showEnd("I LOVE YOU VERY VERY MUCH!");
+    const emojis = ["❤️","🌸","🍫","🌹","💖"];
+    for(let i=0;i<50;i++){
+      const span = document.createElement("span");
+      span.className="float-item";
+      span.style.left = Math.random()*100+"%";
+      span.style.fontSize = (16+Math.random()*24)+"px";
+      span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+      document.body.appendChild(span);
+      setTimeout(()=>span.remove(),4000);
+    }
+  }
+
+  function firecracker(event) {
+    const btn = event.target;
+    btn.classList.add("firecracker");
+    btn.disabled = true;
+    setTimeout(()=>btn.remove(),600);
+  }
+</script>
+
+</body>
+</html>
+>>>>>>> 1cb78077b6da8ab352c5cfddb08f64135945751b
