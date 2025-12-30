@@ -102,13 +102,15 @@
     ]);
   }
 
-  function showQ3() {
-    setBackground("q3");
-    showQuestion("do you love me?", [
-      {text:"Yes", action:()=>showQ5()},
-      {text:"No", action:()=>showEnd("I am still sorry. I will try better.")}
-    ]);
-  }
+  function explodeNoButton(event) {
+  const btn = event.target;
+  btn.classList.add("firecracker");
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.remove();
+  }, 600);
+}
 
   function showQ4() {
     setBackground("q4");
